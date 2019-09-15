@@ -12,6 +12,7 @@ import net.bouzuya.sample4.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels {
+        // FIXME
         object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
