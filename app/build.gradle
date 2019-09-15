@@ -51,6 +51,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version"
     implementation "androidx.room:room-ktx:$androidx_room_version"
     implementation "androidx.room:room-runtime:$androidx_room_version"
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
     kapt "androidx.room:room-compiler:$androidx_room_version"
 
     // FIXME
