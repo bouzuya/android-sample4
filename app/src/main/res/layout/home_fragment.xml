@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -24,5 +25,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{viewModel.count}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/home_url_text_label"
+            android:inputType="text"
+            android:text="@{viewModel.urlText}"
+            app:editTextAfterTextChanged="@{(s) -> viewModel.updateUrlText(s)}"
+            tools:ignore="Autofill" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.insert()}"
+            android:text="@string/home_insert_button_label" />
     </LinearLayout>
 </layout>

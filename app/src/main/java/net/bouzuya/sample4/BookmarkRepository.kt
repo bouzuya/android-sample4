@@ -5,7 +5,7 @@ class BookmarkRepository(private val _bookmarkDao: BookmarkDao) {
 
     suspend fun findById(id: Long): Bookmark? = _bookmarkDao.findById(id).firstOrNull()
 
-    suspend fun insert(user: Bookmark): Unit = _bookmarkDao.insert(user)
+    suspend fun insert(bookmark: Bookmark): Unit = _bookmarkDao.insert(bookmark)
 
     suspend fun update(bookmark: Bookmark): Unit = _bookmarkDao.update(bookmark)
 }
