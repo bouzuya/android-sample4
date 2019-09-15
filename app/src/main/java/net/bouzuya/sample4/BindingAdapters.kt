@@ -21,8 +21,15 @@ fun EditText.setEditTextAfterTextChanged(listener: EditTextAfterTextChangedListe
     }
 }
 
-@BindingAdapter("bookmarkList")
-fun RecyclerView.setBookmarkList(bookmarkList: List<Bookmark>?) {
+interface OnClickBookmarkListener {
+    fun onClick(bookmark: Bookmark)
+}
+
+@BindingAdapter("bookmarkList", "onClickBookmarkListener")
+fun RecyclerView.setBookmarkList(
+    bookmarkList: List<Bookmark>?,
+    onClickBookmarkListener: OnClickBookmarkListener?
+) {
     val itemList = bookmarkList ?: emptyList()
 
     class BindingViewHolder(val binding: HomeBookmarkListItemBinding) :
@@ -46,6 +53,7 @@ fun RecyclerView.setBookmarkList(bookmarkList: List<Bookmark>?) {
 
         override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
             holder.binding.bookmark = itemList[position]
+            holder.binding.onClickBookmarkListener = onClickBookmarkListener
         }
     }
 }

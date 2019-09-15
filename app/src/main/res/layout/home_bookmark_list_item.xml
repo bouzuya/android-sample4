@@ -7,11 +7,16 @@
         <variable
             name="bookmark"
             type="net.bouzuya.sample4.Bookmark" />
+
+        <variable
+            name="onClickBookmarkListener"
+            type="net.bouzuya.sample4.OnClickBookmarkListener" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> onClickBookmarkListener.onClick(bookmark)}"
         android:orientation="horizontal">
 
         <TextView

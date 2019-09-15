@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:bookmarkList="@{viewModel.bookmarkList}"
+            app:onClickBookmarkListener="@{viewModel.edit}"
             tools:itemCount="3"
             tools:listitem="@layout/home_bookmark_list_item" />
 
