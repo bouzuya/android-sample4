@@ -7,17 +7,18 @@ import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 
 class HomeViewModel(private val _bookmarkRepository: BookmarkRepository) : ViewModel() {
-    val name = "Home"
-
-    private val _count = MutableLiveData<Int>()
-    val count: LiveData<String> = Transformations.map(_count) { it.toString() }
+    private val _bookmarkCount = MutableLiveData<Int>()
+    val bookmarkCount: LiveData<String> = Transformations.map(_bookmarkCount) { it.toString() }
 
     private val _urlText = MutableLiveData<String>()
     val urlText: LiveData<String> = _urlText
 
+    private val _bookmarkList = MutableLiveData<List<Bookmark>>()
+    val bookmarkList: LiveData<List<Bookmark>> = _bookmarkList
+
     init {
         viewModelScope.launch {
-            _count.value = _bookmarkRepository.findAll().size
+            refreshList()
         }
     }
 
@@ -29,10 +30,16 @@ class HomeViewModel(private val _bookmarkRepository: BookmarkRepository) : ViewM
         _bookmarkRepository.insert(bookmark)
 
         _urlText.value = ""
-        _count.value = _bookmarkRepository.findAll().size
+
+        refreshList()
     }
 
     fun updateUrlText(s: String) {
         _urlText.value = s
+    }
+
+    private suspend fun refreshList() {
+        _bookmarkList.value = _bookmarkRepository.findAll()
+        _bookmarkCount.value = _bookmarkList.value?.size ?: 0
     }
 }

@@ -1,8 +1,13 @@
 package net.bouzuya.sample4
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import net.bouzuya.sample4.databinding.HomeBookmarkListItemBinding
 
 interface EditTextAfterTextChangedListener {
     fun afterTextChanged(s: String)
@@ -13,5 +18,34 @@ fun EditText.setEditTextAfterTextChanged(listener: EditTextAfterTextChangedListe
     if (listener == null) return
     doAfterTextChanged {
         listener.afterTextChanged(it.toString())
+    }
+}
+
+@BindingAdapter("bookmarkList")
+fun RecyclerView.setBookmarkList(bookmarkList: List<Bookmark>?) {
+    val itemList = bookmarkList ?: emptyList()
+
+    class BindingViewHolder(val binding: HomeBookmarkListItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+    adapter = object : RecyclerView.Adapter<BindingViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
+            return BindingViewHolder(
+                HomeBookmarkListItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        }
+
+        override fun getItemCount(): Int {
+            return itemList.size
+        }
+
+        override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
+            holder.binding.bookmark = itemList[position]
+        }
     }
 }
