@@ -7,6 +7,9 @@ import androidx.room.Update
 
 @Dao
 interface BookmarkDao {
+    @Query("DELETE FROM bookmarks")
+    suspend fun deleteAll()
+
     @Query("SELECT * FROM bookmarks")
     suspend fun findAll(): List<Bookmark>
 

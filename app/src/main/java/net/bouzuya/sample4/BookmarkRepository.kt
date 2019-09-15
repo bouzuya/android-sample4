@@ -1,6 +1,8 @@
 package net.bouzuya.sample4
 
 class BookmarkRepository(private val _bookmarkDao: BookmarkDao) {
+    suspend fun deleteAll(): Unit = _bookmarkDao.deleteAll()
+
     suspend fun findAll(): List<Bookmark> = _bookmarkDao.findAll()
 
     suspend fun findById(id: Long): Bookmark? = _bookmarkDao.findById(id).firstOrNull()

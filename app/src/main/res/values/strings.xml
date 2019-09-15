@@ -2,4 +2,5 @@
     <string name="app_name">Sample4</string>
     <string name="home_url_text_label">http://example.com/</string>
     <string name="home_insert_button_label">insert</string>
+    <string name="home_delete_all_button_label">delete all</string>
 </resources>

@@ -22,6 +22,12 @@ class HomeViewModel(private val _bookmarkRepository: BookmarkRepository) : ViewM
         }
     }
 
+    fun deleteAll() = viewModelScope.launch {
+        _bookmarkRepository.deleteAll()
+
+        refreshList()
+    }
+
     fun insert() = viewModelScope.launch {
         val name = _urlText.value ?: return@launch
         val createdAt = Instant.now().atZone(ZoneOffset.UTC).toOffsetDateTime()
